@@ -1,5 +1,5 @@
-<H3>ENTER YOUR NAME</H3>
-<H3>ENTER YOUR REGISTER NO.</H3>
+<H3>ENTER YOUR NAME</H3> PRIYAADARSHINI.K
+<H3>ENTER YOUR REGISTER NO.</H3> 212223240126
 <H3>EX. NO.1</H3>
 <H3>DATE</H3>
 <H1 ALIGN =CENTER> Introduction to Kaggle and Data preprocessing</H1>
@@ -38,11 +38,68 @@ STEP 6:Splitting the data into test and train<BR>
 
 ##  PROGRAM:
 TYPE YOUR CODE HERE
+```
+import pandas as pd
+import numpy as np
+import io
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from sklearn.model_selection import train_test_split
+# Read the dataset
+df = pd.read_csv('Churn_Modelling.csv')
+print("df.head()")
+df.head()
+print("df.tail()")
+df.tail()
+df.info()
+print(df)
+# Split the dataset
+x = df.iloc[:,:-1].values
+y = df.iloc[:,-1].values
+print(x)
+print(y)
+# Find the missing values 
+print(df.isnull().sum())
+# Handling Missing values 
+print(df.isnull().sum())
+y = df.iloc[:,-1].values
+print(y)
+# Check for the duplicates
+df.duplicated()
+# Detect outliners
+des=df['CreditScore'].describe()
+print(des)
+# Normalize the dataset
+df_numeric = df.select_dtypes(include=[np.number])
+scaler = MinMaxScaler()
+df_scaled = pd.DataFrame(scaler.fit_transform(df_numeric), columns=df_numeric.columns)
+# Splitting the data for training & testing
+x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2,random_state=42)
+print(x_train)  
+print(len(x_train))
+print(x_test)  
+print(len(x_test))
+
+```
 
 
 ## OUTPUT:
 SHOW YOUR OUTPUT HERE
 
+df.head()
+![alt text](image-2.png)
+
+df.tail()
+![alt text](image-3.png)
+
+Missing values
+
+![alt text](image-4.png)
+
+Training values of x and y
+![alt text](image-5.png)
+
+Testing values of x and y
+![alt text](image-6.png)
 
 ## RESULT:
 Thus, Implementation of Data Preprocessing is done in python  using a data set downloaded from Kaggle.
