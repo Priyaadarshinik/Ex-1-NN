@@ -40,44 +40,47 @@ STEP 6:Splitting the data into test and train<BR>
 TYPE YOUR CODE HERE
 ```
 import pandas as pd
-import numpy as np
 import io
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
-# Read the dataset
-df = pd.read_csv('Churn_Modelling.csv')
-print("df.head()")
-df.head()
-print("df.tail()")
-df.tail()
-df.info()
-print(df)
-# Split the dataset
-x = df.iloc[:,:-1].values
-y = df.iloc[:,-1].values
-print(x)
+
+data = pd.read_csv("Churn_Modelling.csv")
+print(data.head())
+print(data.tail())
+
+X=data.iloc[:,:-1].values
+print(X)
+
+y=data.iloc[:,-1].values
 print(y)
-# Find the missing values 
-print(df.isnull().sum())
-# Handling Missing values 
-print(df.isnull().sum())
-y = df.iloc[:,-1].values
-print(y)
-# Check for the duplicates
-df.duplicated()
-# Detect outliners
-des=df['CreditScore'].describe()
-print(des)
-# Normalize the dataset
-df_numeric = df.select_dtypes(include=[np.number])
-scaler = MinMaxScaler()
-df_scaled = pd.DataFrame(scaler.fit_transform(df_numeric), columns=df_numeric.columns)
-# Splitting the data for training & testing
-x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2,random_state=42)
-print(x_train)  
-print(len(x_train))
-print(x_test)  
-print(len(x_test))
+
+data.info()
+
+print("Missing Values: \n ",data.isnull().sum())
+
+print("Duplicate values:\n ")
+print(data.duplicated())
+
+data.describe()
+
+data = data.drop(['Surname', 'Geography','Gender'], axis=1)
+data.head()
+
+scaler=MinMaxScaler()
+df1=pd.DataFrame(scaler.fit_transform(data))
+print("Normalized data \n" , df1)
+
+X_train ,X_test ,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=42)
+print("Training data")
+print(X_train)
+print(y_train)
+
+print("Testing data")
+print(X_test)
+print(y_test)
+print("Length of X_test: ", len(X_test))
+
 
 ```
 
@@ -93,13 +96,23 @@ df.tail()
 
 Missing values
 
-![alt text](image-4.png)
+![alt text](image-7.png)
+
+Duplicate values
+
+![alt text](image-8.png)
+
+Normalized dataset
+
+![alt text](image-9.png)
 
 Training values of x and y
-![alt text](image-5.png)
+
+![alt text](image-10.png)
 
 Testing values of x and y
-![alt text](image-6.png)
+
+![alt text](image-11.png)
 
 ## RESULT:
 Thus, Implementation of Data Preprocessing is done in python  using a data set downloaded from Kaggle.
