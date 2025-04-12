@@ -71,6 +71,9 @@ scaler=MinMaxScaler()
 df1=pd.DataFrame(scaler.fit_transform(data))
 print("Normalized data \n" , df1)
 
+X = data.drop('Exited', axis=1)  
+y = data['Exited'] 
+
 X_train ,X_test ,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=42)
 print("Training data")
 print(X_train)
