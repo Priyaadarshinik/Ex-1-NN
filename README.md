@@ -94,6 +94,10 @@ df.head()
 df.tail()
 ![alt text](image-3.png)
 
+X & Y values
+
+![alt text](image-12.png)
+
 Missing values
 
 ![alt text](image-7.png)
